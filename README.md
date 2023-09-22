@@ -68,7 +68,7 @@
 
 使用协程池`FixedThreadPool`，协程分别可创建1000和2000的条件下，相同并发数，协程调度器`FixedThreadPool`比`ForkJoinPool`的性能好
 
-# 火焰图对比
+# 不同调度器的火焰图对比
 
 火焰图测试代码和结果文件位于项目 mysql_virturethread_schedule_compare
 
