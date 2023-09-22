@@ -72,7 +72,7 @@
 
 火焰图测试代码和结果文件位于项目 mysql_virturethread_schedule_compare
 
-在下面两种图中，图一、图二表示ForkJoinPool调度器运行的部分火焰图，图三、土司表示FixedThreadPool运行的部分火焰，
+在下面的图中，图一、图二表示ForkJoinPool调度器运行的部分火焰图，图三、图四表示FixedThreadPool运行的部分火焰，
 
 导致调度器性能差异的原因主要在于实现的机制不同，从图一、二可见ForkJoinPool调度器采用Unsafe的park/unpark机制，从图三、四可见而FixedThreadPool调度器采用ReentrantLock锁、LockSupport、AbstractQueuedSybchronizer机制
 
@@ -88,11 +88,7 @@
 
 ![image-20230922111836599](image/image-20230922111836599.png)
 
-
-
 ## 图四
-
-
 
 ![image-20230922134318577](image/image-20230922134318577.png)
 
