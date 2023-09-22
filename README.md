@@ -3,7 +3,7 @@
 
 源码在项目 data_benchmark_test 
 
-参考https://github.com/Tencent/TencentKona-8/tree/KonaFiber/demo/fiber/mysql_sync_stress_demo的代码，迁移userFiber模式的执行代码，并将协程的调度器改为自定义的`ForkJoinPool`和`FixedThreadPool`调度器，代码添加在`SyncDatabaseDemoTest`类的`initExecutor`方法中，通过`testOption`变量来选择调度器，主要添加代码如下：
+参考 https://github.com/Tencent/TencentKona-8/tree/KonaFiber/demo/fiber/mysql_sync_stress_demo 的代码，迁移userFiber模式的执行代码，并将协程的调度器改为自定义的`ForkJoinPool`和`FixedThreadPool`调度器，代码添加在`SyncDatabaseDemoTest`类的`initExecutor`方法中，通过`testOption`变量来选择调度器，主要添加代码如下：
 
 ```java
     public static void initExecutor() {
