@@ -66,8 +66,7 @@
 
 ## 结论
 
-在分别使用1000和2000容量的协程池`FixedThreadPool`条件下，
-设置调度器相同的并发数（通过Runtime.getRuntime().availableProcessors()获得值），协程调度器`FixedThreadPool`比`ForkJoinPool`的性能好
+在分别使用1000和2000容量的协程池`FixedThreadPool`条件下，设置调度器相同的并发数（通过Runtime.getRuntime().availableProcessors()获得值），协程调度器`FixedThreadPool`比`ForkJoinPool`的性能好
 
 # 不同调度器的火焰图对比
 
