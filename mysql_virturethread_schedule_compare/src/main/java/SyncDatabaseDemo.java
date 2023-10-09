@@ -5,14 +5,12 @@ import java.util.concurrent.*;
 public class SyncDatabaseDemo {
     private static ExecutorService db_executor;
     private static ExecutorService e;
+    private static ExecutorService scheduler;
 
     private static int threadCount;
     private static int requestCount;
-
     private static int testOption;
-
-    private static ExecutorService scheduler;
-
+    
     public static String execQuery(String sql) throws InterruptedException, ExecutionException {
         String queryResult = "";
         try {
@@ -46,7 +44,6 @@ public class SyncDatabaseDemo {
             @Override
             public void run() {
                 try {
-                    // 任务完成
                     future.complete(execQuery(sql));
                 } catch (Exception e) {
 
@@ -125,12 +122,9 @@ public class SyncDatabaseDemo {
 
     public static void main(String[] args) throws Exception {
         threadCount = Integer.valueOf(args[0]);
-//        threadCount = 1;
         requestCount = Integer.valueOf(args[1]);
-//        requestCount = 10;
         // 1 for ForkJoinPool, 2 for FixedThreadPool
         testOption = Integer.valueOf(args[2]);
-//        testOption = 1;
         run();
     }
 }
