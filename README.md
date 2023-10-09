@@ -103,15 +103,11 @@ run：启动程序，依次调用initExecutor、ConnectionPool.initConnectionPoo
 
 # 火焰图开销分析
 
-删除JMH测试中的注解，编写与测试中功能一致的Demo，便于火焰图生成的准确性，在threadCount = 1000，requestCount = 100000的情况下，分别生成不同调度器下的火焰图，源码和火焰图原文件位于 mysql_virturethread_schedule_compare中。
+删除JMH测试中的注解，编写与测试中功能一致的Demo，便于火焰图生成的准确性，在threadCount = 1000，requestCount = 100000的情况下，分别生成不同调度器下的火焰图，源码和火焰图原文件位于 mysql_virturethread_schedule_compare中。（ https://github.com/ywj0101/Kona-Fiber-Task/tree/main/mysql_virturethread_schedule_compare ）
 
 
 
-通过比较，相似的cpu消耗比如 SyncDatabaseDemo.main、java/lang/Continuation.start、start_thread（系统内核）、sun/misc/InnocuousThread.run
-
-不同的cpu消耗位于`java/lang/Thread.run`和`java/util/concurrent/ForkJoinWorkerThread.run`。其中`java/util/concurrent/CompletableFuture.complete`cpu消耗高的原因在于ForkJoinPool创建或激活任务消耗高（即ForkJoinPool中的signalWork方法）。
-
-`java/util/concurrent/ForkJoinWorkerThread.run`的额外时间消耗在于`  ForkJoinPool$WorkQueue.runTask`、`ForkJoinPool.awaitWork`、`ForkJoinPool.scan`方法，原因在于ForkJoinPool存在work stealing的机制。
+通过比较，相似的cpu消耗比如 SyncDatabaseDemo.main、java/lang/Continuation.start、start_thread（系统内核）、sun/misc/InnocuousThread.run；不同的cpu消耗位于`java/lang/Thread.run`和`java/util/concurrent/ForkJoinWorkerThread.run`。其中`java/util/concurrent/CompletableFuture.complete`cpu消耗高的原因在于ForkJoinPool创建或激活任务消耗高（即ForkJoinPool中的signalWork方法）。`java/util/concurrent/ForkJoinWorkerThread.run`的额外时间消耗在于`  ForkJoinPool$WorkQueue.runTask`、`ForkJoinPool.awaitWork`、`ForkJoinPool.scan`方法，原因在于ForkJoinPool存在work stealing的机制。
 
 
 
