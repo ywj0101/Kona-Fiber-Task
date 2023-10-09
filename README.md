@@ -29,7 +29,7 @@ threadCountInput：控制 threadCount
 
 requestCountInput：控制 requestCount
 
-testOptionInput：控制 `testOption`
+testOptionInput：控制 testOption
 
 **静态类参数**
 
