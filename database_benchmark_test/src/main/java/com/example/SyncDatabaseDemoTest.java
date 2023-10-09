@@ -15,21 +15,21 @@ import java.util.concurrent.*;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.SECONDS)
 public class SyncDatabaseDemoTest {
+    
     @Param({"1000","2000"})
     private int threadCountInput;
     @Param({"100000","200000","300000","400000","500000"})
     private int requestCountInput;
     @Param({"1","2"})
     private int testOptionInput;
+    
     private static ExecutorService db_executor;
     private static ExecutorService e;
-
+    private static ExecutorService scheduler;
+    
     private static int threadCount;
     private static int requestCount;
-
     private static int testOption;
-
-    private static ExecutorService scheduler;
 
     public static String execQuery(String sql) throws InterruptedException, ExecutionException {
         String queryResult = "";
@@ -64,7 +64,6 @@ public class SyncDatabaseDemoTest {
             @Override
             public void run() {
                 try {
-                    // 任务完成
                     future.complete(execQuery(sql));
                 } catch (Exception e) {
 
@@ -115,7 +114,6 @@ public class SyncDatabaseDemoTest {
         ThreadFactory factory;
 
         if (testOption == 1) {
-//            factory = Thread.ofVirtual().factory();
             scheduler = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         }else {
             scheduler = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
@@ -131,9 +129,7 @@ public class SyncDatabaseDemoTest {
     public static void run() throws Exception {
         initExecutor();
         ConnectionPool.initConnectionPool();
-
         testSyncQuery();
-
         ConnectionPool.closeConnection();
     }
 
