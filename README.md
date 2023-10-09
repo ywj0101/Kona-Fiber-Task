@@ -55,9 +55,11 @@ submitQuery：提交查询语句至独立线程池，返回 `future.get()`
 
 testSyncQuery：完成查询任务的提交和等待执行完毕，关闭资源
 
+run：启动程序，依次调用initExecutor、ConnectionPool.initConnectionPool、testSyncQuery、ConnectionPool.closeConnection方法
+
 ## 实现
 
-源码位于项目 data_benchmark_test 
+源码位于项目 data_benchmark_test （https://github.com/ywj0101/Kona-Fiber-Task/tree/main/database_benchmark_test）
 
 # 测试结果
 
